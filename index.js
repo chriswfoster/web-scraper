@@ -16,5 +16,7 @@ const writeToFile = data => {
   const browser = await puppeteer.launch({ headless: false })
   const page = await browser.newPage() // sort of like opening up a new tab.
   await page.goto("https://en.wikipedia.org/wiki/Main_Page")
+  await sleep(page, 60000)
+  const randomArticleLink = document.getElementById("n-randompage")
 })()
 //  ^^^^  this is called an immediately invoked expression. As soon as file loads, it fires off immediately. The same is creating a function, then following it with an invocation.
