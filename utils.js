@@ -2,14 +2,14 @@ const promiseRetry = require("promise-retry");
 const timeout = 1000;
 const iv = 100;
 
-module.exports = (page, maxTimeout = 120000) =>
+module.exports = (page, maxTimeout = 120000) => // waiting until page ID is defined.
   promiseRetry(
     async (retry, number) => {
       try {
         await page.evaluate(iv => {
           return new Promise((resolve, reject) => {
             checkReadyState();
-
+            // evaluate the page ^^^ check ready state below.
             function checkReadyState() {
               if (document.readyState === "complete") {
                 resolve();
