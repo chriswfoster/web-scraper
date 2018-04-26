@@ -21,12 +21,19 @@ const writeToFile = data => {
   //can't use .map, for each, etc. They're not blocking and can't access this data. So use regular for loop
   for (let i = 0; i < 10; i++) {
     await page.click("#n-randompage") //targets element's id and clicks it.
-    const paragraphs = await page.$$("#content p")
+    const paragraphs = await page.$$("#content p") // $$ is select all query selector.
+    const titleNode = await page.$("#firstHeading") // $ is just a single query selector
+    const title = await (await titleNode.getProperty("innerText")).jsonValue()
+    const pageObj = {
+      title,
+      paragraphs: []
+    }
     for (let j = 0; j < paragraphs.length; j++) {
-      data.push({
+      pageObj.paragraphs.push({
         p: await (await paragraphs[j].getProperty("innerText")).jsonValue()
       })
     }
+    data.push(pageObj)
   }
   writeToFile(data)
 })()
