@@ -28,5 +28,6 @@ const writeToFile = data => {
       })
     }
   }
+  writeToFile(data)
 })()
 //  ^^^^  this is called an immediately invoked expression. As soon as file loads, it fires off immediately. The same is creating a function, then following it with an invocation.
